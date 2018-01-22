@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/security" 
+    xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:batch = "http://www.springframework.org/schema/batch" 
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xsi:schemaLocation = "http://www.springframework.org/schema/batch 
+      http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+      http://www.springframework.org/schema/jdbc 
+      http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+      
+    <import resource="context.xml"></import>
+    <bean id="person"  class="com.iris.spring.model" scope="prototype"></bean>
+    
+    <batch:job id="springBatchCsvToDbJob">
+        <batch:step id="springBatchCsvToDbProcessor"  next="callStoredProcedure">
+            <batch:tasklet>
+                <batch:chunk reader="itemReader"  writer="itemWriter"  commit-interval="10">
+                    
+                    
+                </batch:chunk>
+                
+            </batch:tasklet>
+            
+        </batch:step>
+        <batch:step id="callStoredProcedure">
+            
+            <batch:tasklet  ref="storedProcedureCall"></batch:tasklet>
+        </batch:step>
+    </batch:job>
+    
+    
+    <bean id="storedProcedureCall" class="com.iris.spring.tasklet.StoredProcedureTasklet">
+        
+        <property name="dataSource"  ref="dataSource"></property>
+        <property name="sql"  ref="${QUERY}"></property>
+    </bean>
+    
+    <bean id="ïtemReader"  class="org.springframework.batch.item.file.FlatFileItemReader">
+        
+        <property name="resource"  	value="classpath:personData.csv"></property>
+        <property name="linesToSkip"  value="1"></property>
+        <property name="lineMapper" >
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property name="lineTokenizer">
+                    <bean class="org.springframework.batch.item.transform.DelimitedLineTokenizer">
+                        <property name="names"  value="firstName,lastName,address,age,empId"></property>
+                    </bean>
+                </property>
+                
+                <property name="fieldSetMapper">
+                    
+                    <bean  class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+                        <property name="prototypeBeanName"  value="personModel"></property>
+                        
+                    </bean>
+                </property>
+                
+            </bean>
+            
+        </property>
+    </bean>
+    
+    <bean id="itemWriter"  class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+        <property name="dataSource"  ref="dataSource"></property>
+        <property name="sql" >
+            <value>
+                <![CDATA[
+
+                insert into PERSON_DATA(firstName,lastName,address,age,empId)
+
+                values (:firstName,:lastName,:address,:age,:empId)
+
+            ]]>
+                
+            </value>
+            
+        </property>
+        
+        <property name="itemSqlParameterSourceProvider">
+            
+            <bean class="org.springframework.batch.item.database.BeanPropertyItemSqlSourceProvider"></bean>
+        </property>
+        
+    </bean>
+    
+    </beans>
