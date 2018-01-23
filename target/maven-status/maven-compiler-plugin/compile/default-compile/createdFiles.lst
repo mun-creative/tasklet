@@ -1,1 +1,4 @@
-com\medha\spring\tasklet\App.class
+com\iris\spring\tasklet\StoredProcedureTasklet.class
+com\iris\spring\tasklet\App.class
+com\iris\spring\model\Person.class
+com\iris\spring\mapper\PersonMapper.class
