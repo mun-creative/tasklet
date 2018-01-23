@@ -58,7 +58,7 @@
     <bean id="storedProcedureCall" class="com.iris.spring.tasklet.StoredProcedureTasklet">
         
         <property name="dataSource"  ref="dataSource"></property>
-        <property name="sql"  ref="${QUERY}"></property>
+        <property name="sql"  value="${QUERY}"></property>
     </bean>
     
     <bean id="itemReader"  class="org.springframework.batch.item.file.FlatFileItemReader">
@@ -70,7 +70,7 @@
         <property name="lineMapper" >
             <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
                 <property name="lineTokenizer">
-                    <bean class="org.springframework.batch.item.transform.DelimitedLineTokenizer">
+                    <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
                         <property name="names"  value="firstName,lastName,address,age,empId"></property>
                     </bean>
                 </property>
@@ -106,7 +106,7 @@
         
         <property name="itemSqlParameterSourceProvider">
             
-            <bean class="org.springframework.batch.item.database.BeanPropertyItemSqlSourceProvider"></bean>
+            <bean class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider"></bean>
         </property>
         
     </bean>

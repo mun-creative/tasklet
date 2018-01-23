@@ -14,9 +14,7 @@
 
             <list>
 
-                <value>classpath:query.properties
-
-                </value>                             
+                <value>classpath:query.properties</value>                             
 
             </list>
 

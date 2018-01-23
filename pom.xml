@@ -52,11 +52,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<dependency>
-  <groupId>org.apache.pdfbox</groupId>
-  <artifactId>pdfbox</artifactId>
-  <version>1.8.4</version>
-</dependency>
+
 
 <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 <dependency>
@@ -95,7 +91,7 @@
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>3.2.0.RELEASE</version>
+    <version>4.0.5.RELEASE</version>
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-oxm -->
