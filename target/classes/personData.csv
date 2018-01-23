@@ -1,5 +1,5 @@
-firstName	lastName	address	age	empId
-“Alex”,	“Borneo”,	“101, Wellington, London”,	31,	111390
-“Theodora”,	“Rousevelt”,	“2nd Cross, Virgina, USA”,	25,	111909
-“Artemisia”,	“Brown”,	“West Southampton,NJ”,	23,	111809
-“Cindrella”,	“James”,	“Middletown, New Jersey,”	28,	111304
+firstName,lastName,address,age,empId
+Alex,Borneo,"101, Wellington, London","31","111390"
+Theodora,Rousevelt,"2nd Cross, Virgina, USA","25","111909"
+Artemisia,Brown,"West Southampton,NJ","23","111809"
+Cindrella,James,"Middletown, New Jersey","28","111304"

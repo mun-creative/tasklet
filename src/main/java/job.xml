@@ -35,7 +35,7 @@
       
     <import resource="context.xml"></import>
     
-    <bean id="person"  class="com.iris.spring.model" scope="prototype"></bean>    
+    <bean id="person"  class="com.iris.spring.model.Person" scope="prototype"></bean>    
     
     <batch:job id="springBatchCsvToDbJob">
         <batch:step id="springBatchCsvToDbProcessor"  next="callStoredProcedure">
@@ -78,7 +78,7 @@
                 <property name="fieldSetMapper">
                     
                     <bean  class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
-                        <property name="prototypeBeanName"  value="personModel"></property>
+                        <property name="prototypeBeanName"  value="person"></property>
                         
                     </bean>
                 </property>
